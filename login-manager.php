@@ -68,7 +68,7 @@ $connection_string = "host=$host port=$port dbname=$db user=$username password=$
 			else{
 				return false;
 			}
-   		}
+   	    }
    	}	
 
 ?>

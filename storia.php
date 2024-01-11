@@ -10,8 +10,11 @@
 <body>
 <div id="mainStoria">
 <?php
+session_start();
 include("header.php");
+
 ?>
+
 
 <div id="contenutoStoria">
 <h2>Storia del Social Engineering</h2>
