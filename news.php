@@ -1,21 +1,21 @@
-<?php
-session_start();
-?>
+
 <html>
     <head>
 	<title>NEWS | Social Engineering</title>
     <meta charset="UTF-8">
     <meta name="description" content="Sito web sul Social Engineering">
-	<link rel="shortcut icon" href="icona.png" type="image/x-icon">
+	<link rel="shortcut icon" href="foto_news/icona.png" type="image/x-icon">
 	<link href="style.css" rel="stylesheet" type="text/css">
     </head>
 </html>
 <body>
 <div id="mainNews">
 <?php
-include("header.php");
+        include("header.php");
 ?>
 </body>
+<button onclick="getCoordinates()">Mostra posizione</button>
+    <p id="coordinates"></p>
 <div id="contenutoNews" class="news-container"> 
     <div class="argomento"> 
         <div class="testo">
@@ -24,7 +24,7 @@ include("header.php");
                                 c'è tanto della classica sapienza da social engineering che i...
             </p>
         </div>
-        <img src="fotoNews/meloni.jpeg" alt="News Image" class="image">
+        <img src="foto_news/meloni.jpeg" alt="News Image" class="image">
     </div>
     <div class="argomento"> 
         <div class="testo">
@@ -33,7 +33,7 @@ include("header.php");
                                     stragrande maggioranza deli attacchi. La causa più diffusa degli...
             </p>
         </div>
-        <img src="fotoNews/openLab.jpeg" alt="News Image" class="image">
+        <img src="foto_news/openLab.jpeg" alt="News Image" class="image">
     </div>
     <div class="argomento"> 
         <div class="testo">
@@ -43,7 +43,7 @@ include("header.php");
                                     personali degli...
             </p>
         </div>
-        <img src="fotoNews/hacker.jpeg" alt="News Image" class="image">
+        <img src="foto_news/hacker.jpeg" alt="News Image" class="image">
     </div>
     <div class="argomento"> 
         <div class="testo">
@@ -53,7 +53,7 @@ include("header.php");
                                     complessi o...
             </p>
         </div>
-        <img src="fotoNews/cellulare.jpeg" alt="News Image" class="image">
+        <img src="foto_news/cellulare.jpeg" alt="News Image" class="image">
     </div>
     
 </div>
@@ -68,3 +68,32 @@ include('footer.html');
 ?>
 </footer>
 </html>
+<script>
+        function successCallback(position) {  //getCurrentPosition fa in modo che questa funzione riceve un oggetto position che contiene tutte le info.
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            document.getElementById("coordinates").innerHTML = "Latitudine: " + latitude + "<br>Longitudine: " + longitude;
+        }
+
+        function errorCallback(error) { //getCurrentPosition fa in modo che questa funzione riceve un oggetto error che contiene tutte le info.
+            switch (error.code) { //Questo costrutto switch si basa sul valore del campo code dell'oggetto error. code contiene il codice dell'errore specifico.
+                case error.PERMISSION_DENIED:
+                    document.getElementById("coordinates").innerHTML = "Permesso negato.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("coordinates").innerHTML = "Posizione non disponibile.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("coordinates").innerHTML = "Richiesta scaduta.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById("coordinates").innerHTML = "Errore sconosciuto.";
+                    break;
+            }
+        }
+
+        function getCoordinates() {  
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            /* Questa funzione accetta due argomenti: una funzione di callback per il caso di successo (successCallback)
+        e una funzione di callback per gestire gli errori (errorCallback).*/        }
+    </script>

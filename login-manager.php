@@ -1,18 +1,9 @@
 <?php
-$host = 'localhost';
-$port = '5432';
-$dbname = 'group18';
-$username = 'www';
-$password = 'root';
-
-$connection_string = "host=$host port=$port dbname=$dbname user=$username password=$password";
-
+require "credenziali_db.php";
 // Connessione al database
 $db = pg_connect($connection_string) or die('Impossibile connetersi al database: ' . pg_last_error());
 
 // Prendi il valore dell'username dalla richiesta POST
-
-
 $user = $_POST['username'];
 $pass = $_POST['password'];
 
@@ -44,12 +35,7 @@ pg_close($db);
 ?>
 <?php
    function get_pwd($user){
-$host = 'localhost';
-$port = '5432';
-$db = 'group18';
-$username = 'www';
-$password = 'root';
-$connection_string = "host=$host port=$port dbname=$db user=$username password=$password";
+	require "credenziali_db.php";
    		//CONNESSIONE AL DB
 		$db = pg_connect($connection_string) or die('Impossibile connetersi al database: ' . pg_last_error());
 		$sql = "SELECT password FROM account WHERE username=$1;";

@@ -7,16 +7,16 @@
 #mainImage img {
     width: 100%;
     height: 800px;
-    display: block; /* Impedisce la visualizzazione di eventuali spazi bianchi sotto l'immagine */
+    display: block;
 }
 #header  {
     
     top: 0;
     left: 0;
     width: 100%;
-    height:100px; /* Altezza del rettangolo, personalizzala secondo le tue esigenze */
-    background-color: rgb(14, 14, 56); /* Colore blu trasparente (RGBA) */
-    z-index: 1; /* Assicura che il rettangolo sia sovrapposto all'immagine */
+    height:100px;
+    background-color: rgb(14, 14, 56); 
+    z-index: 1; 
 }
 #header a {
     float: left;
@@ -43,9 +43,9 @@
     color: black;
 }
 .header-right a {
-    font-family: "Arial", sans-serif; /* Cambia il font */
-    font-size: 16px; /* Cambia la dimensione del testo */
-    color: #333; /* Cambia il colore del testo */
+    font-family: "Arial", sans-serif; 
+    font-size: 16px; 
+    color: #333; 
 }
 
 
@@ -57,7 +57,7 @@
 #header_bottom {
     position: absolute;
     top: 70px;
-    /* Altezza del #header */
+    
     width: 100%;
     text-align: center;
 }
@@ -152,7 +152,7 @@ footer {
   .social-links a {
     text-decoration: none;
     color: #fff;
-    font-size: 20px; /* Regola la dimensione dell'icona */
+    font-size: 20px; 
 }
 
 .disclaimer {
@@ -184,9 +184,9 @@ footer {
     border: 2px solid rgba(255,255,255,0.2);
     backdrop-filter: blur(20px);
     color: #fff;
-    margin:auto; /* Centra il contenuto orizzontalmente */
-    padding: 30px 40px; /* Aggiungi spaziatura interna per separare il contenuto dal bordo */
-    max-width: max-content; /* Imposta una larghezza massima per il contenuto */
+    margin:auto; 
+    padding: 30px 40px; 
+    max-width: max-content; 
     border-radius: 10px;
     
 }
@@ -236,8 +236,8 @@ footer {
     font-weight: 600;
 }
 #login_content   .custom-btn {
-    text-align: center; /* Imposta l'allineamento del testo al centro */
-    padding: 10px 20px; /* Imposta lo spazio interno del pulsante */
+    text-align: center; 
+    padding: 10px 20px; 
 }
 #login_content .register-link{
     font-size: 14px;
@@ -256,8 +256,6 @@ footer {
 .register-ok h2{
  color: green;
 }
-/* Aggiungi il CSS per decorare il contenuto della storia */
-/* Aggiungi il CSS per decorare il contenuto della storia */
 #contenutoStoria {
     font-family: Arial, sans-serif;
     font-size: 16px;
@@ -273,8 +271,8 @@ footer {
     color: #007bff;
 }
 #contenutoStoria .underscored{
-    border: 1px solid #ff6666; /* Bordo rosso leggero */
-    padding: 2px; /* Aggiunto padding per separare il testo dal bordo */
+    border: 1px solid #ff6666; 
+    padding: 2px;
 }
 #contenutoStoria h3{
     color: #007bff;
@@ -319,7 +317,7 @@ footer {
   
   #contenutoNews .argomento {
     display: flex;
-    align-items: center; /* Allinea il contenuto verticalmente */
+    align-items: center; 
     margin-bottom: 20px;
   }
   
@@ -342,7 +340,7 @@ footer {
 #quiz_title{
     position: absolute;
     top: 70px;
-    /* Altezza del #header */
+    
     width: 100%;
     text-align: center;
 }
@@ -467,8 +465,8 @@ margin: 0;
 
 }
 #contenutoPersonalita .underscored{
-    border: 1px solid #ff6666; /* Bordo rosso leggero */
-    padding: 2px; /* Aggiunto padding per separare il testo dal bordo */
+    border: 1px solid #ff6666;
+    padding: 2px; 
 }
 #contenutoPersonalita h3{
     color: #007bff;

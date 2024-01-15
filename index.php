@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +5,7 @@ session_start();
     <meta charset="UTF-8">
     <title>Social Engineering</title>
     <meta name="description" content="Sito web sul Social Engineering">
-    <link rel="shortcut icon" href="icona.png" type="image/x-icon">
+    <link rel="shortcut icon" href="foto_index/icona.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
@@ -23,12 +20,12 @@ session_start();
                 <?php
                 
                 if(!isLogged()){
-                echo '<h2><a href="login.php">Accedi per esplorare <br> <br> Contenuti esclusivi</a></h2>';
+                echo '<h2><a href="gestione_utente.php?login=1">Accedi per esplorare <br> <br> Contenuti esclusivi</a></h2>';
                 }
                 ?>
         </div>
         
-        <img src="sfondo.jpg" alt="Social">
+        <img src="foto_index/sfondo.jpg" alt="Social">
     </div>
 
     <!-- se l'utente non è loggato dovrà vedere solo due delle immagini -->
@@ -38,28 +35,28 @@ session_start();
             echo '
         <li id="elenco_container">
             <a href="quiz.php">
-                <img src="quiz.png" id="img1" alt="Quiz">          
+                <img src="foto_index/quiz.png" id="img1" alt="Quiz">          
             </a>
         </li >';
         }
         if(!isLogged()){
             echo '
         <li id="elenco_container">
-            <a href="login.php">
-                <img src="quizSfocato.png" id="img1_sfocata" alt="Quiz">          
+            <a href="gestione_utente.php?login=1">
+                <img src="foto_index/quizSfocato.png" id="img1_sfocata" alt="Quiz">          
             </a>
         </li >';
         }
         ?>
         <li id="elenco_container">
             <a href="news.php">
-                <img src="news.png" id="img2" alt="News">
+                <img src="foto_index/news.png" id="img2" alt="News">
 
             </a>
         </li>
         <li id="elenco_container">
             <a href="storia.php">
-                <img src="storia.png" id="img3" alt="Storia">
+                <img src="foto_index/storia.png" id="img3" alt="Storia">
 
             </a>
         </li>

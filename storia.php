@@ -3,16 +3,14 @@
 	<title>STORIA | Social Engineering</title>
     <meta charset="UTF-8">
     <meta name="description" content="Sito web sul Social Engineering">
-	<link rel="shortcut icon" href="icona.png" type="image/x-icon">
+	<link rel="shortcut icon" href="foto_storia/icona.png" type="image/x-icon">
 	<link href="style.css" rel="stylesheet" type="text/css">
     </head>
 </html>
 <body>
 <div id="mainStoria">
 <?php
-session_start();
 include("header.php");
-
 ?>
 
 

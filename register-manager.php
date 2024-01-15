@@ -20,7 +20,7 @@ if(isset($_POST['password']))
                     session_start();
                     $_SESSION['username'] = $user;
                     $_SESSION['keyRegister'] = 'registrazione_effettuata';
-					header("Location:register.php");
+					header("Location:gestione_utente.php?register=1");
 				}
 				
     ?>
@@ -29,13 +29,7 @@ if(isset($_POST['password']))
 </body>
 <?php
 function insert_utente($user, $pass){
-	$host = 'localhost';
-$port = '5432';
-$db = 'group18';
-$username = 'www';
-$password = 'root';
-
-$connection_string = "host=$host port=$port dbname=$db user=$username password=$password";
+	require "credenziali_db.php";
 	//CONNESSIONE AL DB
 	$db = pg_connect($connection_string) or die('Impossibile connetersi al database: ' . pg_last_error());
 		//echo "Connessione al database riuscita<br/>"; 

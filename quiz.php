@@ -4,7 +4,7 @@
     <title>QUIZ | Social Engineering</title>
     <meta charset="UTF-8">
     <meta name="description" content="Sito web sul Social Engineering">
-    <link rel="shortcut icon" href="icona.png" type="image/x-icon">
+    <link rel="shortcut icon" href="foto_quiz/icona.png" type="image/x-icon">
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -19,7 +19,7 @@
         <div id=quiz_title>
             <h1>Test della Personalità</h1>
         </div>
-        <img src="quiz/mainQuiz.jpg">
+        <img src="foto_quiz/mainQuiz.jpg">
     </div>
     <div id="main-box">
         <div class="home-box custom-box ">
@@ -168,22 +168,22 @@
     }
     }
     if(conteggioUno==0){
-        window.location.href = 'personalita/comandante.php';
+        window.location.href = 'risultato_personalita.php?personalita=comandante';
     }
     if(conteggioUno==1){
-        window.location.href = 'personalita/protagonista.php';
+        window.location.href = 'risultato_personalita.php?personalita=protagonista';
     }
     if(conteggioUno==2){
-        window.location.href = 'personalita/imprenditore.php';
+        window.location.href = 'risultato_personalita.php?personalita=imprenditore';
     }
     if(conteggioUno==3){
-        window.location.href = 'personalita/avventuriero.php';
+        window.location.href = 'risultato_personalita.php?personalita=avventuriero';
     }
     if(conteggioUno==4){
-        window.location.href = 'personalita/sostenitore.php';
+        window.location.href = 'risultato_personalita.php?personalita=sostenitore';
     }
     if(conteggioUno==5){
-        window.location.href = 'personalita/difensore.php';
+        window.location.href = 'risultato_personalita.php?personalita=difensore';
     }
     }
 
