@@ -1,20 +1,18 @@
-
 <html>
 <body>
-<?php
-if(isset($_POST['password']))
+    <?php
+	if(isset($_POST['password']))
 		$pass = $_POST['password'];
 	else
 		$pass = "";
-    	if(isset($_POST['repassword']))
+		if(isset($_POST['repassword']))
 		$repassword = $_POST['repassword'];
 	else
 		$repassword = "";
-    	if(isset($_POST['username']))
+		if(isset($_POST['username']))
 		$user = $_POST['username'];
 	else
 		$user = "";
-    
 				//ORA posso inserire il nuovo utente nel db
 				if(insert_utente($user, $pass)){
                     session_start();
@@ -22,9 +20,7 @@ if(isset($_POST['password']))
                     $_SESSION['keyRegister'] = 'registrazione_effettuata';
 					header("Location:gestione_utente.php?register=1");
 				}
-				
     ?>
-
 </html>
 </body>
 <?php

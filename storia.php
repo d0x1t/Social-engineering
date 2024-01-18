@@ -14,7 +14,7 @@ include("header.php");
 ?>
 
 
-<div id="contenutoStoria">
+        <div id="contenutoStoria">
 <h2>Storia del Social Engineering</h2>
     <div>Da sempre conosciuto nel panorama della cybersecurity, il social engineering, o ingegneria sociale,
     rappresenta una delle tecniche più efficaci utilizzate dagli hacker per spingere gli utenti a divulgare 

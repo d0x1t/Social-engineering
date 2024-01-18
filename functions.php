@@ -8,7 +8,10 @@ function isLogged()
 		return false;
 	}
 }
-//funzione per effettuare il logout
+
+//**********************************// 
+
+// FUNZIONE PER IL LOGOUT //
 if (isset($_GET['logout'])) {
 	session_destroy();
 	header("location: index.php");
@@ -17,7 +20,7 @@ if (isset($_GET['logout'])) {
 ?>
 <script type="text/javascript">
 
-//FUNZIONI PER IL LOGIN//
+// FUNZIONI PER IL LOGIN //
 
 function controllaUtenteEsistente_login(callback) {
     var username = document.form_log.username.value;
@@ -172,5 +175,182 @@ function controllaUtenteEsistente_register(callback) {
         window.location.href = "index.php";
     }, 2000); 
 }
+//********************************************//
+
+// FUNZIONI PER LE NEWS //
+
+function successCallback(position) {  //getCurrentPosition fa in modo che questa funzione riceve un oggetto position che contiene tutte le info.
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            document.getElementById("coordinates").innerHTML = "Latitudine: " + latitude + "<br>Longitudine: " + longitude;
+        }
+
+        function errorCallback(error) { //getCurrentPosition fa in modo che questa funzione riceve un oggetto error che contiene tutte le info.
+            switch (error.code) { //Questo costrutto switch si basa sul valore del campo code dell'oggetto error. code contiene il codice dell'errore specifico.
+                case error.PERMISSION_DENIED:
+                    document.getElementById("coordinates").innerHTML = "Permesso negato.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("coordinates").innerHTML = "Posizione non disponibile.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("coordinates").innerHTML = "Richiesta scaduta.";
+                    break;
+                case error.UNKNOWN_ERROR:
+                    document.getElementById("coordinates").innerHTML = "Errore sconosciuto.";
+                    break;
+            }
+        }
+
+        function getCoordinates() {  
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+            /* Questa funzione accetta due argomenti: una funzione di callback per il caso di successo (successCallback)
+        e una funzione di callback per gestire gli errori (errorCallback).*/      
+        }
+//********************************************//
+
+//FUNZIONI PER IL QUIZ //
+
+var opzione_scelta = -1;  // 1 se sceglie si 
+    function ottieni_risultato_si() {
+        var siOptionElement = document.getElementById("si_option");
+        var noOptionElement = document.getElementById("no_option");
+
+        // Colora lo sfondo di verde per l'opzione "Si"
+        siOptionElement.style.backgroundColor = "#33A474";
+
+
+        // Colora lo sfondo di grigio per l'opzione "No"
+        noOptionElement.style.backgroundColor = "#cccccc";
+        opzione_scelta = 1;
+    
+    }
+
+
+    function ottieni_risultato_no() {
+        var siOptionElement = document.getElementById("si_option");
+        var noOptionElement = document.getElementById("no_option");
+
+        // Colora lo sfondo di verde per l'opzione "No"
+        noOptionElement.style.backgroundColor = "#33A474";
+
+        // Colora lo sfondo di grigio per l'opzione "Si"
+        siOptionElement.style.backgroundColor = "#cccccc";
+        opzione_scelta = 2;
+
+    }
+    function inizializza_risultato() {
+        var siOptionElement = document.getElementById("si_option");
+        var noOptionElement = document.getElementById("no_option");
+
+        // Colora lo sfondo di grigio per l'opzione "Si"
+        siOptionElement.style.backgroundColor = "#cccccc";
+        // Colora lo sfondo di grigio per l'opzione "No"
+        noOptionElement.style.backgroundColor = "#cccccc";
+
+
+    }
+    function startQuiz() {
+        // Ottieni gli elementi HTML delle due box
+        var homeBoxElement = document.querySelector('.home-box');
+        var quizBoxElement = document.querySelector('.quiz-box');
+        var resultBoxElement =document.getElementById("mostra_risultato");
+
+        // Nascondi il box del risultato nel caso del quiz gia svolto
+        if(resultBoxElement) // Controlla se esiste resultBoxElement. Perche se l'utente effettua il quiz per la prima volta allora non esiste
+        resultBoxElement.style.display= 'none';
+        // Nascondi home-box
+        homeBoxElement.style.display = 'none';
+
+        // Rimuovi la classe hide da quiz-box
+        quizBoxElement.classList.remove('hide');
+
+        
+        
+        caricaDomandaSuccessiva();
+        opzione_scelta = 0;
+    }
+
+
+    var numeroDomandaCorrente = 0; // Inizializza la variabile per tenere traccia della domanda corrente
+    var risultati = [];
+    function caricaDomandaSuccessiva() {
+        if (opzione_scelta == 0) {
+            alert("Devi scegliere almeno un opzione prima di proseguire");
+            exit();
+        }
+        if(opzione_scelta!=-1){
+        risultati.push(opzione_scelta);
+        
+        }
+        opzione_scelta = 0;
+        inizializza_risultato();
+        // Incrementa il numero di domanda corrente
+        numeroDomandaCorrente++;
+
+        // Ottieni l'elemento HTML della domanda
+        var questionsTextElement = document.getElementById("questionsText");
+        var successivaButtonElement = document.getElementById("successiva_button");
+        var risultatoButtonElement = document.getElementById("risultato_button");
+
+        // Esegui la richiesta AJAX per ottenere la domanda successiva dal server
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST', 'prossima_domanda.php', true);
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // Aggiorna il testo della domanda nella div
+                questionsTextElement.innerHTML = xmlhttp.responseText;
+
+                // Aggiorna il numero di domanda nella div
+                document.querySelector(".question-number").textContent = "Domanda " + numeroDomandaCorrente + " di 5";
+
+                // Cambia il testo del pulsante se si è alla domanda 5
+                if (numeroDomandaCorrente == 5) {
+                    successivaButtonElement.style.display = 'none';
+                    // Rimuovi la classe hide da quiz-box
+                    risultatoButtonElement.classList.remove('hide');
+                }
+            }
+        };
+
+        // Invia i dati al server con il metodo POST
+        var params = 'numero_domanda_corrente=' + numeroDomandaCorrente;
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xmlhttp.send(params);
+    }
+    function caricaRisultato() {
+        if (opzione_scelta == 0) {
+            alert("Devi scegliere almeno un opzione prima di proseguire");
+            exit();
+        }
+        risultati.push(opzione_scelta);
+      // Conta quanti 1 ci sono nell'array risultati
+      var conteggioUno = 0;
+
+    for (var i = 0; i < risultati.length; i++) {
+        if (risultati[i] === 1) {
+            conteggioUno++;
+        }
+    }
+    if(conteggioUno==0){
+        window.location.href = 'risultato_personalita.php?personalita=comandante';
+    }
+    if(conteggioUno==1){
+        window.location.href = 'risultato_personalita.php?personalita=protagonista';
+    }
+    if(conteggioUno==2){
+        window.location.href = 'risultato_personalita.php?personalita=imprenditore';
+    }
+    if(conteggioUno==3){
+        window.location.href = 'risultato_personalita.php?personalita=avventuriero';
+    }
+    if(conteggioUno==4){
+        window.location.href = 'risultato_personalita.php?personalita=sostenitore';
+    }
+    if(conteggioUno==5){
+        window.location.href = 'risultato_personalita.php?personalita=difensore';
+    }
+    }
+
 //********************************************//
 </script>

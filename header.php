@@ -2,9 +2,7 @@
 include("functions.php");
 ?>
 <html>
-
 <body>
-
     <div id="header">
         <?php
             if (!isLogged()) {
@@ -30,7 +28,5 @@ include("functions.php");
             }
         ?>
     </div>
-
 </body>
-
 </html>

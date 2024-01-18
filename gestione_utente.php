@@ -9,12 +9,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <div id="mainLogin">
+    <div id="main_gestione_utente">
         <?php
             include("header.php");
             if(isset($_GET['login'])){
-                echo '<div id=login_page>
-                        <div id=login_content>
+                echo '<div class="container_form_gestione_utente">
+                        <div class="form_gestione_utente">
                             <h2>Login</h2>
                             <form method="post"  autocomplete="off" name="form_log" action="index.php">
                             <div class="input-box">
@@ -39,8 +39,8 @@
 <footer> ';
             }
             elseif(isset($_GET['register'])){
-                echo '<div id=login_page>
-                        <div id=login_content>
+                echo '<div class="container_form_gestione_utente">
+                        <div class="form_gestione_utente">
                             <h2>Registrati</h2>
                             <form  method="post" action="register-manager.php" autocomplete="off" name="form_reg">
                             <div class="input-box">

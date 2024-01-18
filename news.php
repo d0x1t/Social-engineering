@@ -58,42 +58,9 @@
     
 </div>
 </body>
-
-
-
-
 <footer>
 <?php
 include('footer.html');
 ?>
 </footer>
 </html>
-<script>
-        function successCallback(position) {  //getCurrentPosition fa in modo che questa funzione riceve un oggetto position che contiene tutte le info.
-            var latitude = position.coords.latitude;
-            var longitude = position.coords.longitude;
-            document.getElementById("coordinates").innerHTML = "Latitudine: " + latitude + "<br>Longitudine: " + longitude;
-        }
-
-        function errorCallback(error) { //getCurrentPosition fa in modo che questa funzione riceve un oggetto error che contiene tutte le info.
-            switch (error.code) { //Questo costrutto switch si basa sul valore del campo code dell'oggetto error. code contiene il codice dell'errore specifico.
-                case error.PERMISSION_DENIED:
-                    document.getElementById("coordinates").innerHTML = "Permesso negato.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    document.getElementById("coordinates").innerHTML = "Posizione non disponibile.";
-                    break;
-                case error.TIMEOUT:
-                    document.getElementById("coordinates").innerHTML = "Richiesta scaduta.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    document.getElementById("coordinates").innerHTML = "Errore sconosciuto.";
-                    break;
-            }
-        }
-
-        function getCoordinates() {  
-            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
-            /* Questa funzione accetta due argomenti: una funzione di callback per il caso di successo (successCallback)
-        e una funzione di callback per gestire gli errori (errorCallback).*/        }
-    </script>

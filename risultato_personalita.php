@@ -11,7 +11,7 @@
 </html>
 
 <body>
-    <div id="mainStoria">
+    <div id="mainPersonalita">
         <?php
         include("header.php");
         if (isset($_GET['personalita'])) {
