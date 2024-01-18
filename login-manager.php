@@ -34,7 +34,7 @@ if (!$ret) {
 pg_close($db);
 ?>
 <?php
-function get_pwd($user){
+   function get_pwd($user){
 	require "credenziali_db.php";
    		//CONNESSIONE AL DB
 		$db = pg_connect($connection_string) or die('Impossibile connetersi al database: ' . pg_last_error());

@@ -22,7 +22,6 @@ if (!$ret) {
         echo "not_exists";
     }
 }
-
 // Chiudi la connessione al database
 pg_close($db);
 ?>

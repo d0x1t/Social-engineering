@@ -14,6 +14,11 @@
     <div id="mainQuiz">
         <?php
         include("header.php");
+        if (!isset($_SESSION['username'])) { //Per evitare che il quiz venga raggiunto tramite URL
+            echo '<a href="gestione_utente.php?login=1">EFFETTUA IL LOGIN</a>';
+            exit;
+        }
+        recuperaPersonalitaDaDatabase();
         ?>
         <div id=quiz_title>
             <h1>Test della Personalità</h1>
@@ -43,7 +48,7 @@
             </div>
         </div>
         <?php
-            if (isset($_SESSION["risultato_personalita"])) {
+            if (isset($_SESSION['risultato_personalita'])) {
                 echo '
                         <div id="mostra_risultato" class="home-box custom-box">
                             <h3> Hai già svolto il quiz </h3>

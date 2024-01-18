@@ -121,7 +121,7 @@ body {
     align-items: flex-start;
 }
 
-#elenco_container {
+.elenco_container {
     width: 100%;
 }
 

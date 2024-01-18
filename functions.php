@@ -17,6 +17,37 @@ if (isset($_GET['logout'])) {
 	header("location: index.php");
 }
 //**********************************// 
+
+// FUNZIONE PER IL QUIZ //
+
+function recuperaPersonalitaDaDatabase() {
+    require "credenziali_db.php";
+
+    $db = pg_connect($connection_string);
+    // Prepara la query utilizzando un prepared statement
+    $query = "SELECT personalita FROM risultato WHERE username = $1";
+    $stmt = pg_prepare($db, "ottieni_personalita", $query);
+
+
+    // Ottieni l'username dalla sessione
+    $username = $_SESSION['username'];
+
+    // Esegue la query con l'username fornito come parametro
+    $result = pg_execute($db, "ottieni_personalita", array($username));
+
+    if (!$result) {
+        echo "ERRORE QUERY: " . pg_last_error($db);
+    }else{
+    $row = pg_fetch_assoc($result);
+    // Salva la personalità nella sessione
+    if(isset($row['personalita']))
+    $_SESSION['risultato_personalita'] = $row['personalita'];
+    }
+    // Chiude la connessione al database
+    pg_close($db);
+}
+
+
 ?>
 <script type="text/javascript">
 
@@ -268,7 +299,7 @@ var opzione_scelta = -1;  // 1 se sceglie si
         
         
         caricaDomandaSuccessiva();
-        opzione_scelta = 0;
+        opzione_scelta=0;
     }
 
 
@@ -279,21 +310,27 @@ var opzione_scelta = -1;  // 1 se sceglie si
             alert("Devi scegliere almeno un opzione prima di proseguire");
             exit();
         }
+        
+        if(numeroDomandaCorrente==2 && opzione_scelta==2){ //Questo per mantenere coerenza con i risultati
+            opzione_scelta=1;
+        }
+        else if(numeroDomandaCorrente==2 && opzione_scelta==1){ 
+            opzione_scelta=2;
+        }
         if(opzione_scelta!=-1){
         risultati.push(opzione_scelta);
-        
         }
         opzione_scelta = 0;
         inizializza_risultato();
         // Incrementa il numero di domanda corrente
         numeroDomandaCorrente++;
 
-        // Ottieni l'elemento HTML della domanda
+        //Ottieni l'elemento HTML della domanda
         var questionsTextElement = document.getElementById("questionsText");
         var successivaButtonElement = document.getElementById("successiva_button");
         var risultatoButtonElement = document.getElementById("risultato_button");
 
-        // Esegui la richiesta AJAX per ottenere la domanda successiva dal server
+        //Esegui la richiesta AJAX per ottenere la domanda successiva dal server
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.open('POST', 'prossima_domanda.php', true);
         xmlhttp.onreadystatechange = function () {
@@ -313,7 +350,7 @@ var opzione_scelta = -1;  // 1 se sceglie si
             }
         };
 
-        // Invia i dati al server con il metodo POST
+        //Invia i dati al server con il metodo POST
         var params = 'numero_domanda_corrente=' + numeroDomandaCorrente;
         xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xmlhttp.send(params);
@@ -323,34 +360,76 @@ var opzione_scelta = -1;  // 1 se sceglie si
             alert("Devi scegliere almeno un opzione prima di proseguire");
             exit();
         }
+        if(numeroDomandaCorrente==5 && opzione_scelta==2){ //Questo per mantenere coerenza con i risultati
+            opzione_scelta=1;
+        }
+        else if(numeroDomandaCorrente==5 && opzione_scelta==1){ 
+            opzione_scelta=2;
+        }
         risultati.push(opzione_scelta);
-      // Conta quanti 1 ci sono nell'array risultati
-      var conteggioUno = 0;
+      //Conta quanti 1 ci sono nell'array risultati
+    var conteggioUno = 0;
 
     for (var i = 0; i < risultati.length; i++) {
         if (risultati[i] === 1) {
             conteggioUno++;
         }
+    } 
+    if (risultati[0] == 1 && (risultati[3] == 1 && risultati[4] == 2)) {
+        var numeroCasuale = Math.random();
+    var personalitaScelta;
+    if (numeroCasuale < 0.5) {
+        personalitaScelta = 'imprenditore';
+    } else {
+        personalitaScelta = 'comandante';
     }
-    if(conteggioUno==0){
-        window.location.href = 'risultato_personalita.php?personalita=comandante';
+    effettua_salvataggio_personalita(personalitaScelta);
+    window.location.href = 'risultato_personalita.php?personalita=' + personalitaScelta;
+    exit();
+}
+
+    if (conteggioUno == 2 || conteggioUno == 3) {  //Questo perche le due personalita sono assai simili.
+    //Genera un numero casuale tra 0 e 1
+    var numeroCasuale = Math.random();
+    var personalitaScelta;
+    if (numeroCasuale < 0.5) {
+        personalitaScelta = 'imprenditore';
+    } else {
+        personalitaScelta = 'avventuriero';
     }
-    if(conteggioUno==1){
-        window.location.href = 'risultato_personalita.php?personalita=protagonista';
+    effettua_salvataggio_personalita(personalitaScelta);
+    window.location.href = 'risultato_personalita.php?personalita=' + personalitaScelta;
     }
-    if(conteggioUno==2){
-        window.location.href = 'risultato_personalita.php?personalita=imprenditore';
+
+
+    if(conteggioUno==4 || conteggioUno == 1 ){
+        var numeroCasuale = Math.random();
+    var personalitaScelta;
+    if (numeroCasuale < 0.5) {
+        personalitaScelta = 'protagonista';
+    } else {
+        personalitaScelta = 'sostenitore';
     }
-    if(conteggioUno==3){
-        window.location.href = 'risultato_personalita.php?personalita=avventuriero';
+    effettua_salvataggio_personalita(personalitaScelta);
+    window.location.href = 'risultato_personalita.php?personalita=' + personalitaScelta;
     }
-    if(conteggioUno==4){
-        window.location.href = 'risultato_personalita.php?personalita=sostenitore';
-    }
+
+
     if(conteggioUno==5){
+        var personalitaScelta = 'difensore';
+        effettua_salvataggio_personalita(personalitaScelta);
         window.location.href = 'risultato_personalita.php?personalita=difensore';
     }
     }
-
+    function effettua_salvataggio_personalita(personalitaScelta){
+            //Esegui la richiesta AJAX per ottenere la domanda successiva dal server
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open('POST', 'salva_risultato.php', true);
+        
+        //Invia i dati al server con il metodo POST
+        var params = 'personalita_scelta=' + personalitaScelta;
+        xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xmlhttp.send(params);
+    }
 //********************************************//
 </script>

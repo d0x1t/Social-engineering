@@ -33,7 +33,7 @@
         <?php
         if (isLogged()) {
             echo '
-        <li id="elenco_container">
+        <li class="elenco_container">
             <a href="quiz.php">
                 <img src="foto_index/quiz.png" id="img1" alt="Quiz">          
             </a>
@@ -41,21 +41,21 @@
         }
         if(!isLogged()){
             echo '
-        <li id="elenco_container">
+        <li class="elenco_container">
             <a href="gestione_utente.php?login=1">
                 <img src="foto_index/quizSfocato.png" id="img1_sfocata" alt="Quiz">          
             </a>
         </li >';
         }
         ?>
-        <li id="elenco_container">
-            <a href="news.php">
+        <li class="elenco_container">
+            <a href="news_storia.php?news=1">
                 <img src="foto_index/news.png" id="img2" alt="News">
 
             </a>
         </li>
-        <li id="elenco_container">
-            <a href="storia.php">
+        <li class="elenco_container">
+            <a href="news_storia.php?storia=1">
                 <img src="foto_index/storia.png" id="img3" alt="Storia">
 
             </a>

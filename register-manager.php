@@ -28,7 +28,7 @@ function insert_utente($user, $pass){
 	require "credenziali_db.php";
 	//CONNESSIONE AL DB
 	$db = pg_connect($connection_string) or die('Impossibile connetersi al database: ' . pg_last_error());
-		//echo "Connessione al database riuscita<br/>"; 
+		
 	$hash = password_hash($pass, PASSWORD_DEFAULT);
 	$sql = "INSERT INTO account(username, password) VALUES($1, $2)";
 	$prep = pg_prepare($db, "insertUser", $sql); 
